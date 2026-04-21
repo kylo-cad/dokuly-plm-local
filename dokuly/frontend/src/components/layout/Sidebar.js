@@ -373,6 +373,25 @@ const Sidebar = (props) => {
             </Link>
           </li>
         )}
+
+      {/* AI Spec Assistant */}
+      <li
+        className={`nav-item mt-2 ${
+          location.pathname.startsWith("/ai-spec-assistant") ? "nav-item-active" : ""
+        }`}
+        key={"AI Spec Assistant"}
+        style={{ borderTop: "1px solid #E5E5E5" }}
+      >
+        <Link to="/ai-spec-assistant" className="nav-link ">
+          <img
+            src="../../static/icons/cpu.svg"
+            alt="AI"
+            width="22px"
+            className="dokuly-filter-primary"
+          />
+          <span className="nav-text">AI Spec Assistant</span>
+        </Link>
+      </li>
     </ul>
   );
 

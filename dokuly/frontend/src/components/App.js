@@ -55,6 +55,7 @@ import DisplayLot from "./production/lots/displayLot";
 import EcoDashboard from "./eco/ecoDashboard";
 import DisplayEco from "./eco/displayEco";
 import CommandPalette from "./dokuly_components/commandPalette/CommandPalette";
+import AISpecAssistantDashboard from "./ai_spec_assistant/AISpecAssistantDashboard";
 
 // Component to track page views
 
@@ -418,6 +419,12 @@ function App() {
                             exact={true}
                             path="/eco/:id/*"
                             element={<DisplayEco />}
+                          />
+
+                          <Route
+                            exact={true}
+                            path="/ai-spec-assistant"
+                            element={<AISpecAssistantDashboard />}
                           />
                         </Route>
                       </Routes>
