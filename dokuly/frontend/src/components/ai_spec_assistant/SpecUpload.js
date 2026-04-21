@@ -25,6 +25,23 @@ const SpecUpload = ({ onComplete }) => {
     }, 2000);
   };
 
+  const handleUseSampleData = () => {
+    // Set a mock file for display purposes
+    const mockFile = {
+      name: "新製品要求仕様書_v1.0.pdf",
+      size: 2.4 * 1024 * 1024 // 2.4 MB
+    };
+    setFile(mockFile);
+    setUploading(true);
+
+    // Simulate AI processing
+    setTimeout(() => {
+      setUploading(false);
+      setUploadComplete(true);
+      setExtractedSpecs(mockSpecifications.current);
+    }, 1500);
+  };
+
   const handleConfirm = () => {
     onComplete();
   };
@@ -70,23 +87,47 @@ const SpecUpload = ({ onComplete }) => {
                   <small>サイズ: {(file.size / 1024 / 1024).toFixed(2)} MB</small>
                 </div>
               )}
-              <button
-                className="btn btn-primary"
-                onClick={handleUpload}
-                disabled={!file || uploading}
-              >
-                {uploading ? (
-                  <>
-                    <span className="spinner-border spinner-border-sm me-2" />
-                    AI解析中...
-                  </>
-                ) : (
-                  "アップロードして解析"
-                )}
-              </button>
+              <div className="d-flex gap-2 justify-content-center">
+                <button
+                  className="btn btn-primary"
+                  onClick={handleUpload}
+                  disabled={!file || uploading}
+                >
+                  {uploading ? (
+                    <>
+                      <span className="spinner-border spinner-border-sm me-2" />
+                      AI解析中...
+                    </>
+                  ) : (
+                    "アップロードして解析"
+                  )}
+                </button>
+                <button
+                  className="btn btn-outline-success"
+                  onClick={handleUseSampleData}
+                  disabled={uploading}
+                >
+                  {uploading ? (
+                    <>
+                      <span className="spinner-border spinner-border-sm me-2" />
+                      AI解析中...
+                    </>
+                  ) : (
+                    <>
+                      <img
+                        src="../../static/icons/file.svg"
+                        alt="sample"
+                        width="16"
+                        className="me-2"
+                      />
+                      サンプルデータで体験
+                    </>
+                  )}
+                </button>
+              </div>
             </div>
             <small className="text-muted">
-              対応形式: PDF, TIFF, PNG (最大30MB)
+              対応形式: PDF, TIFF, PNG (最大30MB) | サンプルデータですぐに体験できます
             </small>
           </div>
         )}

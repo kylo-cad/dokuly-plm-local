@@ -392,6 +392,24 @@ const Sidebar = (props) => {
           <span className="nav-text">AI Spec Assistant</span>
         </Link>
       </li>
+
+      {/* AI Cost Estimation */}
+      <li
+        className={`nav-item ${
+          location.pathname.startsWith("/ai-cost-estimation") ? "nav-item-active" : ""
+        }`}
+        key={"AI Cost Estimation"}
+      >
+        <Link to="/ai-cost-estimation" className="nav-link ">
+          <img
+            src="../../static/icons/dollar-sign.svg"
+            alt="Cost"
+            width="22px"
+            className="dokuly-filter-primary"
+          />
+          <span className="nav-text">AI原価査定</span>
+        </Link>
+      </li>
     </ul>
   );
 

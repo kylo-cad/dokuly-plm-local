@@ -277,16 +277,102 @@ export const mockReviewComments = [
     author: "山田太郎（品質管理）",
     date: "2026-04-20 14:30",
     comment: "バッテリー容量増加による発熱リスクについて、熱シミュレーション結果を添付してください。",
-    status: "open"
+    status: "resolved",
+    response: "熱シミュレーション実施済み。放熱フィン追加により温度上昇を3℃以内に抑制できることを確認しました。結果を添付ファイルに追加しました。",
+    response_date: "2026-04-20 16:45"
   },
   {
     id: 2,
     author: "佐藤花子（設計）",
     date: "2026-04-20 15:15",
     comment: "NFCアンテナの配置について、Bluetoothとの干渉を考慮した設計図面を確認したいです。",
-    status: "open"
+    status: "resolved",
+    response: "アンテナ配置図を更新しました。NFCとBluetoothのアンテナ間距離を15mm確保し、干渉リスクを最小化しています。",
+    response_date: "2026-04-20 17:20"
+  },
+  {
+    id: 3,
+    author: "鈴木一郎（調達）",
+    date: "2026-04-21 09:00",
+    comment: "NFCモジュールのサプライヤーとリードタイムを確認しました。代替サプライヤーも確保済みです。承認します。",
+    status: "approved"
   }
 ];
+
+export const mockApprovalHistory = [
+  {
+    id: 1,
+    reviewer: "鈴木一郎（調達）",
+    role: "調達部門承認者",
+    date: "2026-04-21 10:30",
+    status: "approved",
+    comment: "部品調達の観点から問題ありません。NFCモジュールの代替サプライヤーも確保済みです。"
+  },
+  {
+    id: 2,
+    reviewer: "山田太郎（品質管理）",
+    role: "品質管理承認者",
+    date: "2026-04-21 11:15",
+    status: "approved",
+    comment: "熱シミュレーション結果を確認しました。対策が適切に実施されており、品質リスクは許容範囲内です。"
+  },
+  {
+    id: 3,
+    reviewer: "佐藤花子（設計）",
+    role: "設計部門承認者",
+    date: "2026-04-21 14:00",
+    status: "pending",
+    comment: null
+  },
+  {
+    id: 4,
+    reviewer: "田中次郎（部門長）",
+    role: "最終承認者",
+    date: null,
+    status: "pending",
+    comment: null
+  }
+];
+
+export const mockFinalSummary = {
+  project_name: "新型スマートウォッチ v2",
+  created_date: "2026-04-18",
+  approved_date: "2026-04-21",
+  base_model: "スマートウォッチ v1",
+
+  changes: {
+    total_parts: 8,
+    changed_parts: 4,
+    new_parts: 1,
+    removed_parts: 0
+  },
+
+  cost: {
+    base_model: 2800,
+    new_model: 3450,
+    difference: 650,
+    percentage: 23.2
+  },
+
+  risks: {
+    high: 2,
+    medium: 3,
+    low: 1
+  },
+
+  timeline: {
+    design_review: "2026-04-25",
+    prototype: "2026-05-15",
+    mass_production: "2026-06-30"
+  },
+
+  approvers: [
+    { name: "鈴木一郎", role: "調達", status: "approved" },
+    { name: "山田太郎", role: "品質管理", status: "approved" },
+    { name: "佐藤花子", role: "設計", status: "approved" },
+    { name: "田中次郎", role: "部門長", status: "approved" }
+  ]
+};
 
 export const mockWorkflowSteps = [
   { step: 1, name: "要求仕様入力", status: "completed", date: "2026-04-18" },

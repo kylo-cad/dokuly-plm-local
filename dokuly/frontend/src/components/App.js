@@ -56,6 +56,7 @@ import EcoDashboard from "./eco/ecoDashboard";
 import DisplayEco from "./eco/displayEco";
 import CommandPalette from "./dokuly_components/commandPalette/CommandPalette";
 import AISpecAssistantDashboard from "./ai_spec_assistant/AISpecAssistantDashboard";
+import AICostEstimationDashboard from "./ai_cost_estimation/AICostEstimationDashboard";
 
 // Component to track page views
 
@@ -425,6 +426,12 @@ function App() {
                             exact={true}
                             path="/ai-spec-assistant"
                             element={<AISpecAssistantDashboard />}
+                          />
+
+                          <Route
+                            exact={true}
+                            path="/ai-cost-estimation"
+                            element={<AICostEstimationDashboard />}
                           />
                         </Route>
                       </Routes>

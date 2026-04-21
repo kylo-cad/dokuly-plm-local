@@ -9,6 +9,17 @@ import ReviewWorkflow from "./ReviewWorkflow";
 const AISpecAssistantDashboard = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [selectedProject, setSelectedProject] = useState(null);
+  const [reviewPhase, setReviewPhase] = useState("initial"); // Track review workflow phase
+
+  const handleReviewPhaseChange = (phase) => {
+    setReviewPhase(phase);
+    // Update current step based on review phase
+    if (phase === "approved") {
+      setCurrentStep(7);
+    } else if (phase === "completed") {
+      setCurrentStep(8);
+    }
+  };
 
   const renderStepContent = () => {
     switch (currentStep) {
@@ -33,10 +44,47 @@ const AISpecAssistantDashboard = () => {
       case 5:
         return <RiskDashboard onComplete={() => setCurrentStep(6)} />;
       case 6:
-        return <ReviewWorkflow />;
+      case 7:
+      case 8:
+        return <ReviewWorkflow onPhaseChange={handleReviewPhaseChange} />;
       default:
         return <div>Unknown step</div>;
     }
+  };
+
+  // Get workflow step status based on current progress
+  const getStepStatus = (step) => {
+    const stepNum = step.step;
+
+    if (stepNum < currentStep) {
+      return "completed";
+    }
+
+    if (stepNum === currentStep) {
+      // Special handling for review workflow
+      if (stepNum === 6) {
+        if (reviewPhase === "initial" || reviewPhase === "submitted") {
+          return "in_progress";
+        }
+        if (reviewPhase === "reviewing") {
+          return "in_progress";
+        }
+        if (reviewPhase === "approved" || reviewPhase === "completed") {
+          return "completed";
+        }
+      }
+      return "in_progress";
+    }
+
+    if (stepNum === 7 && reviewPhase === "approved") {
+      return "in_progress";
+    }
+
+    if (stepNum === 8 && reviewPhase === "completed") {
+      return "completed";
+    }
+
+    return "pending";
   };
 
   return (
@@ -66,62 +114,65 @@ const AISpecAssistantDashboard = () => {
             <div className="card-body">
               <h5 className="card-title mb-3">ワークフロー進捗</h5>
               <div className="d-flex justify-content-between align-items-center">
-                {mockWorkflowSteps.map((step, index) => (
-                  <React.Fragment key={step.step}>
-                    <div
-                      className="text-center"
-                      style={{ flex: 1, cursor: "pointer" }}
-                      onClick={() => {
-                        if (step.status === "completed") {
-                          setCurrentStep(step.step);
-                        }
-                      }}
-                    >
+                {mockWorkflowSteps.map((step, index) => {
+                  const status = getStepStatus(step);
+                  return (
+                    <React.Fragment key={step.step}>
                       <div
-                        className={`rounded-circle d-inline-flex align-items-center justify-content-center mb-2 ${
-                          step.status === "completed"
-                            ? "bg-success text-white"
-                            : step.status === "in_progress"
-                            ? "bg-primary text-white"
-                            : "bg-secondary text-white"
-                        }`}
-                        style={{ width: 40, height: 40 }}
-                      >
-                        {step.status === "completed" ? (
-                          "✓"
-                        ) : step.status === "in_progress" ? (
-                          <span className="spinner-border spinner-border-sm" />
-                        ) : (
-                          step.step
-                        )}
-                      </div>
-                      <div>
-                        <small
-                          className={
-                            currentStep === step.step ? "fw-bold" : ""
+                        className="text-center"
+                        style={{ flex: 1, cursor: "pointer" }}
+                        onClick={() => {
+                          if (status === "completed" && step.step <= currentStep) {
+                            setCurrentStep(step.step);
                           }
-                        >
-                          {step.name}
-                        </small>
-                        {step.date && (
-                          <div>
-                            <small className="text-muted">{step.date}</small>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                    {index < mockWorkflowSteps.length - 1 && (
-                      <div
-                        style={{
-                          flex: 0.5,
-                          height: 2,
-                          backgroundColor:
-                            step.status === "completed" ? "#28a745" : "#dee2e6",
                         }}
-                      />
-                    )}
-                  </React.Fragment>
-                ))}
+                      >
+                        <div
+                          className={`rounded-circle d-inline-flex align-items-center justify-content-center mb-2 ${
+                            status === "completed"
+                              ? "bg-success text-white"
+                              : status === "in_progress"
+                              ? "bg-primary text-white"
+                              : "bg-secondary text-white"
+                          }`}
+                          style={{ width: 40, height: 40 }}
+                        >
+                          {status === "completed" ? (
+                            "✓"
+                          ) : status === "in_progress" ? (
+                            step.step
+                          ) : (
+                            step.step
+                          )}
+                        </div>
+                        <div>
+                          <small
+                            className={
+                              currentStep === step.step ? "fw-bold" : ""
+                            }
+                          >
+                            {step.name}
+                          </small>
+                          {step.date && (
+                            <div>
+                              <small className="text-muted">{step.date}</small>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                      {index < mockWorkflowSteps.length - 1 && (
+                        <div
+                          style={{
+                            flex: 0.5,
+                            height: 2,
+                            backgroundColor:
+                              status === "completed" ? "#28a745" : "#dee2e6",
+                          }}
+                        />
+                      )}
+                    </React.Fragment>
+                  );
+                })}
               </div>
             </div>
           </div>
