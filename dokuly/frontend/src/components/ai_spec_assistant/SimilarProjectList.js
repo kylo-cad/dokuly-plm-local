@@ -48,6 +48,23 @@ const SimilarProjectList = ({ onSelectProject }) => {
           ステップ2: 仕様一覧から類似案件が絞り込まれる
         </h4>
 
+        {/* Help Section */}
+        <div className="alert alert-light border mb-4">
+          <div className="d-flex align-items-start">
+            <img
+              src="../../static/icons/info.svg"
+              alt="Info"
+              width="20"
+              className="me-2 mt-1"
+            />
+            <div className="small">
+              <strong>このステップの目的:</strong> 過去の類似案件を自動検索し、RFLPベースの設計意図の相同性を判定します。
+              <br />
+              <strong>ポイント:</strong> 完全一致させたい仕様を最大5項目選択することで、より精度の高い類似案件を発見できます。
+            </div>
+          </div>
+        </div>
+
         {/* Filter Selection */}
         <div className="mb-4">
           <label className="form-label fw-bold">

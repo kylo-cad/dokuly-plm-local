@@ -55,6 +55,23 @@ const ReviewWorkflow = ({ onPhaseChange }) => {
             ステップ6: レビュー申請
           </h4>
 
+          {/* Help Section */}
+          <div className="alert alert-light border mb-4">
+            <div className="d-flex align-items-start">
+              <img
+                src="../../static/icons/info.svg"
+                alt="Info"
+                width="20"
+                className="me-2 mt-1"
+              />
+              <div className="small">
+                <strong>このステップの目的:</strong> QDリスクとコストを確認し、設計方針をコメントしてレビュー者に承認を依頼します。
+                <br />
+                <strong>ポイント:</strong> レビュー者のフィードバックは次回以降のAI推論に反映され、組織のノウハウとして蓄積されます。
+              </div>
+            </div>
+          </div>
+
           {/* Review Summary */}
           <div className="alert alert-primary mb-4">
             <h5 className="alert-heading">レビュー内容サマリー</h5>

@@ -65,9 +65,28 @@ const SpecUpload = ({ onComplete }) => {
   return (
     <div className="card">
       <div className="card-body">
-        <h4 className="card-title mb-4">
-          ステップ1: 新規案件の要求仕様と図面を入力
-        </h4>
+        <div className="d-flex justify-content-between align-items-start mb-4">
+          <h4 className="card-title mb-0">
+            ステップ1: 新規案件の要求仕様と図面を入力
+          </h4>
+        </div>
+
+        {/* Help Section */}
+        <div className="alert alert-light border mb-4">
+          <div className="d-flex align-items-start">
+            <img
+              src="../../static/icons/info.svg"
+              alt="Info"
+              width="20"
+              className="me-2 mt-1"
+            />
+            <div className="small">
+              <strong>このステップの目的:</strong> 要求仕様書や図面をアップロードし、AIが自動的に仕様を抽出・構造化します。
+              <br />
+              <strong>ポイント:</strong> サンプルデータボタンを使えば、すぐに体験できます。抽出結果は後から手動で修正可能です。
+            </div>
+          </div>
+        </div>
 
         {/* File Upload */}
         {!uploadComplete && (

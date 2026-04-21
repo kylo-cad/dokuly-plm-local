@@ -1,15 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { mockWorkflowSteps } from "./mockData";
 import SpecUpload from "./SpecUpload";
 import SimilarProjectList from "./SimilarProjectList";
 import SpecComparison from "./SpecComparison";
 import RiskDashboard from "./RiskDashboard";
 import ReviewWorkflow from "./ReviewWorkflow";
+import WalkthroughGuide from "./WalkthroughGuide";
+import QuickStartGuide from "./QuickStartGuide";
 
 const AISpecAssistantDashboard = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [selectedProject, setSelectedProject] = useState(null);
   const [reviewPhase, setReviewPhase] = useState("initial"); // Track review workflow phase
+  const [showWalkthrough, setShowWalkthrough] = useState(false);
+  const [showQuickStart, setShowQuickStart] = useState(false);
+  const [walkthroughStep, setWalkthroughStep] = useState(1);
+
+  // Show quick start guide on first visit
+  useEffect(() => {
+    const hasSeenWalkthrough = localStorage.getItem("ai_spec_assistant_walkthrough_seen");
+    if (!hasSeenWalkthrough) {
+      setShowQuickStart(true);
+    }
+  }, []);
 
   const handleReviewPhaseChange = (phase) => {
     setReviewPhase(phase);
@@ -87,23 +100,87 @@ const AISpecAssistantDashboard = () => {
     return "pending";
   };
 
+  const handleWalkthroughClose = () => {
+    setShowWalkthrough(false);
+    localStorage.setItem("ai_spec_assistant_walkthrough_seen", "true");
+  };
+
+  const handleWalkthroughNext = () => {
+    if (walkthroughStep < 6) {
+      setWalkthroughStep(walkthroughStep + 1);
+    }
+  };
+
+  const handleWalkthroughPrev = () => {
+    if (walkthroughStep > 1) {
+      setWalkthroughStep(walkthroughStep - 1);
+    }
+  };
+
+  const handleQuickStartClose = () => {
+    setShowQuickStart(false);
+  };
+
+  const handleStartWalkthrough = () => {
+    setShowQuickStart(false);
+    setWalkthroughStep(1);
+    setShowWalkthrough(true);
+  };
+
   return (
     <div className="container-fluid">
+      {/* Quick Start Guide */}
+      {showQuickStart && (
+        <QuickStartGuide
+          onClose={handleQuickStartClose}
+          onStartWalkthrough={handleStartWalkthrough}
+        />
+      )}
+
+      {/* Walkthrough Guide */}
+      {showWalkthrough && (
+        <WalkthroughGuide
+          currentStep={walkthroughStep}
+          onClose={handleWalkthroughClose}
+          onNext={handleWalkthroughNext}
+          onPrev={handleWalkthroughPrev}
+        />
+      )}
+
       {/* Header */}
       <div className="row mt-4 mb-3">
         <div className="col">
-          <h2>
-            <img
-              src="../../static/icons/cpu.svg"
-              alt="AI"
-              width="32"
-              className="dokuly-filter-primary me-2"
-            />
-            AI類似仕様アシスト
-          </h2>
-          <p className="text-muted">
-            過去案件から最適な基準モデルを選定し、QDリスクとコストを予測します
-          </p>
+          <div className="d-flex justify-content-between align-items-start">
+            <div>
+              <h2>
+                <img
+                  src="../../static/icons/cpu.svg"
+                  alt="AI"
+                  width="32"
+                  className="dokuly-filter-primary me-2"
+                />
+                AI類似仕様アシスト
+              </h2>
+              <p className="text-muted">
+                過去案件から最適な基準モデルを選定し、QDリスクとコストを予測します
+              </p>
+            </div>
+            <button
+              className="btn btn-outline-primary"
+              onClick={() => {
+                setShowWalkthrough(true);
+                setWalkthroughStep(currentStep);
+              }}
+            >
+              <img
+                src="../../static/icons/help-circle.svg"
+                alt="Help"
+                width="20"
+                className="me-2"
+              />
+              使い方ガイド
+            </button>
+          </div>
         </div>
       </div>
 

@@ -45,6 +45,23 @@ const RiskDashboard = ({ onComplete }) => {
           ステップ5: QDリスクとコストの提示
         </h4>
 
+        {/* Help Section */}
+        <div className="alert alert-light border mb-4">
+          <div className="d-flex align-items-start">
+            <img
+              src="../../static/icons/info.svg"
+              alt="Info"
+              width="20"
+              className="me-2 mt-1"
+            />
+            <div className="small">
+              <strong>このステップの目的:</strong> AIが品質・納期リスクとコストを推論し、DRBFMベースの変化点分析を提示します。
+              <br />
+              <strong>ポイント:</strong> 過去の不具合事例と環境規制チェックにより、品質リスクを事前に予測できます。
+            </div>
+          </div>
+        </div>
+
         {/* Risk Overview */}
         <div className="row mb-4">
           <div className="col-md-3">

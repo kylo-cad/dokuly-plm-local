@@ -100,6 +100,23 @@ const SpecComparison = ({ selectedProject, onComplete }) => {
           ステップ3-4: 仕様差分の確認と変更部品の決定
         </h4>
 
+        {/* Help Section */}
+        <div className="alert alert-light border mb-4">
+          <div className="d-flex align-items-start">
+            <img
+              src="../../static/icons/info.svg"
+              alt="Info"
+              width="20"
+              className="me-2 mt-1"
+            />
+            <div className="small">
+              <strong>このステップの目的:</strong> 基準モデルとの仕様差分を確認し、変更が必要な部品やユニットを決定します。
+              <br />
+              <strong>ポイント:</strong> BOM比較と標準原価を確認しながら、コスト最適化と設計効率化を両立できます。
+            </div>
+          </div>
+        </div>
+
         {/* Project Info */}
         <div className="alert alert-info mb-4">
           <strong>基準モデル:</strong> {selectedProject?.name}
