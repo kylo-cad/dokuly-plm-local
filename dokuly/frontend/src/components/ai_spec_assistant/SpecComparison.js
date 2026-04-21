@@ -128,7 +128,7 @@ const SpecComparison = ({ selectedProject, onComplete }) => {
         <div className="mb-4">
           <h5 className="mb-3">仕様差分</h5>
           <div className="table-responsive">
-            <table className="table table-bordered">
+            <table className="table table-bordered spec-differences-table">
               <thead>
                 <tr>
                   <th style={{ width: "20%" }}>仕様項目</th>

@@ -122,7 +122,7 @@ const SpecUpload = ({ onComplete }) => {
                   )}
                 </button>
                 <button
-                  className="btn btn-outline-success"
+                  className="btn btn-outline-success sample-data-button"
                   onClick={handleUseSampleData}
                   disabled={uploading}
                 >

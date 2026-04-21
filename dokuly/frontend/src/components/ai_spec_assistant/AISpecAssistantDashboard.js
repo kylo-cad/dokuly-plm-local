@@ -5,16 +5,16 @@ import SimilarProjectList from "./SimilarProjectList";
 import SpecComparison from "./SpecComparison";
 import RiskDashboard from "./RiskDashboard";
 import ReviewWorkflow from "./ReviewWorkflow";
-import WalkthroughGuide from "./WalkthroughGuide";
+import InteractiveWalkthrough from "./InteractiveWalkthrough";
 import QuickStartGuide from "./QuickStartGuide";
 
 const AISpecAssistantDashboard = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [selectedProject, setSelectedProject] = useState(null);
   const [reviewPhase, setReviewPhase] = useState("initial"); // Track review workflow phase
-  const [showWalkthrough, setShowWalkthrough] = useState(false);
+  const [showInteractiveWalkthrough, setShowInteractiveWalkthrough] = useState(false);
   const [showQuickStart, setShowQuickStart] = useState(false);
-  const [walkthroughStep, setWalkthroughStep] = useState(1);
+  const [interactiveStep, setInteractiveStep] = useState(1);
 
   // Show quick start guide on first visit
   useEffect(() => {
@@ -100,21 +100,26 @@ const AISpecAssistantDashboard = () => {
     return "pending";
   };
 
-  const handleWalkthroughClose = () => {
-    setShowWalkthrough(false);
+  const handleInteractiveWalkthroughClose = () => {
+    setShowInteractiveWalkthrough(false);
     localStorage.setItem("ai_spec_assistant_walkthrough_seen", "true");
   };
 
-  const handleWalkthroughNext = () => {
-    if (walkthroughStep < 6) {
-      setWalkthroughStep(walkthroughStep + 1);
+  const handleInteractiveWalkthroughNext = () => {
+    if (interactiveStep < 6) {
+      setInteractiveStep(interactiveStep + 1);
+      // Auto-advance the workflow step if needed
+      if (interactiveStep === 1 && currentStep === 1) {
+        // User will click sample data button
+      } else if (interactiveStep === 2 && currentStep === 2) {
+        // User will select a project
+      }
     }
   };
 
-  const handleWalkthroughPrev = () => {
-    if (walkthroughStep > 1) {
-      setWalkthroughStep(walkthroughStep - 1);
-    }
+  const handleInteractiveWalkthroughComplete = () => {
+    setShowInteractiveWalkthrough(false);
+    localStorage.setItem("ai_spec_assistant_walkthrough_seen", "true");
   };
 
   const handleQuickStartClose = () => {
@@ -123,8 +128,8 @@ const AISpecAssistantDashboard = () => {
 
   const handleStartWalkthrough = () => {
     setShowQuickStart(false);
-    setWalkthroughStep(1);
-    setShowWalkthrough(true);
+    setInteractiveStep(1);
+    setShowInteractiveWalkthrough(true);
   };
 
   return (
@@ -137,13 +142,14 @@ const AISpecAssistantDashboard = () => {
         />
       )}
 
-      {/* Walkthrough Guide */}
-      {showWalkthrough && (
-        <WalkthroughGuide
-          currentStep={walkthroughStep}
-          onClose={handleWalkthroughClose}
-          onNext={handleWalkthroughNext}
-          onPrev={handleWalkthroughPrev}
+      {/* Interactive Walkthrough */}
+      {showInteractiveWalkthrough && (
+        <InteractiveWalkthrough
+          currentStep={interactiveStep}
+          workflowStep={currentStep}
+          onClose={handleInteractiveWalkthroughClose}
+          onNext={handleInteractiveWalkthroughNext}
+          onComplete={handleInteractiveWalkthroughComplete}
         />
       )}
 
@@ -168,8 +174,8 @@ const AISpecAssistantDashboard = () => {
             <button
               className="btn btn-outline-primary"
               onClick={() => {
-                setShowWalkthrough(true);
-                setWalkthroughStep(currentStep);
+                setShowInteractiveWalkthrough(true);
+                setInteractiveStep(currentStep);
               }}
             >
               <img

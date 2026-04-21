@@ -63,7 +63,7 @@ const RiskDashboard = ({ onComplete }) => {
         </div>
 
         {/* Risk Overview */}
-        <div className="row mb-4">
+        <div className="row mb-4 risk-overview-cards">
           <div className="col-md-3">
             <div className="card bg-danger text-white">
               <div className="card-body text-center">

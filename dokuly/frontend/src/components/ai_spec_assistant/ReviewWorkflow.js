@@ -146,7 +146,7 @@ const ReviewWorkflow = ({ onPhaseChange }) => {
               戻る
             </button>
             <button
-              className="btn btn-primary"
+              className="btn btn-primary review-submit-button"
               onClick={handleSubmitReview}
               disabled={!reviewerEmail || !userComment}
             >

@@ -207,7 +207,7 @@ const SimilarProjectList = ({ onSelectProject }) => {
             戻る
           </button>
           <button
-            className="btn btn-success"
+            className="btn btn-success confirm-selection-button"
             disabled={!selectedProjectId}
             onClick={handleConfirmSelection}
           >
