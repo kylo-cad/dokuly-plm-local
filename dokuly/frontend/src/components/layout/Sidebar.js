@@ -373,6 +373,82 @@ const Sidebar = (props) => {
             </Link>
           </li>
         )}
+
+      <li
+        className={`nav-item mt-2 ${
+          location.pathname.startsWith("/ai-tools")
+            ? "nav-item-active"
+            : ""
+        }`}
+        key={"AI Tools"}
+        style={{ borderTop: "1px solid #E5E5E5" }}
+      >
+        <Link to="/ai-tools" className="nav-link ">
+          <img
+            src="../../static/icons/cpu.svg"
+            alt="AI Tools"
+            className="dokuly-filter-primary"
+          />
+          <span className="nav-text">AI Tools</span>
+        </Link>
+      </li>
+
+      <li
+        className={`nav-item ${
+          location.pathname.startsWith("/ai-tools/bom-composer")
+            ? "nav-item-active"
+            : ""
+        }`}
+        key={"BOM Composer"}
+      >
+        <Link to="/ai-tools/bom-composer" className="nav-link " style={{ paddingLeft: "2.5rem" }}>
+          <img
+            src="../../static/icons/cpu.svg"
+            alt="BOM Composer"
+            className="dokuly-filter-secondary"
+            style={{ width: "18px" }}
+          />
+          <span className="nav-text">BOM Composer</span>
+        </Link>
+      </li>
+
+      <li
+        className={`nav-item ${
+          location.pathname === "/ai-cost-estimation"
+            ? "nav-item-active"
+            : ""
+        }`}
+        key={"AI Cost Estimation"}
+      >
+        <Link to="/ai-cost-estimation" className="nav-link " style={{ paddingLeft: "2.5rem" }}>
+          <img
+            src="../../static/icons/dollar-sign.svg"
+            alt="AI Cost"
+            className="dokuly-filter-secondary"
+            style={{ width: "18px" }}
+          />
+          <span className="nav-text">AI原価査定</span>
+        </Link>
+      </li>
+
+      <li
+        className={`nav-item mt-2 ${
+          location.pathname.startsWith("/engineering-value-chain")
+            ? "nav-item-active"
+            : ""
+        }`}
+        key={"Engineering Value Chain"}
+        style={{ borderTop: "1px solid #E5E5E5" }}
+      >
+        <Link to="/engineering-value-chain" className="nav-link ">
+          <img
+            src="../../static/icons/trending-up.svg"
+            alt="value chain"
+            className="dokuly-filter-primary"
+          />
+          <span className="nav-text">Value Chain View</span>
+        </Link>
+      </li>
     </ul>
   );
 

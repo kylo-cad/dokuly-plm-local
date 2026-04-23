@@ -55,6 +55,10 @@ import DisplayLot from "./production/lots/displayLot";
 import EcoDashboard from "./eco/ecoDashboard";
 import DisplayEco from "./eco/displayEco";
 import CommandPalette from "./dokuly_components/commandPalette/CommandPalette";
+import EngineeringValueChainDashboard from "./engineering_value_chain/EngineeringValueChainDashboard";
+import PhaseDetail from "./engineering_value_chain/PhaseDetail";
+import AIToolsDashboard from "./engineering_value_chain/AIToolsDashboard";
+import BOMComposerTool from "./engineering_value_chain/BOMComposerTool";
 
 // Component to track page views
 
@@ -418,6 +422,28 @@ function App() {
                             exact={true}
                             path="/eco/:id/*"
                             element={<DisplayEco />}
+                          />
+
+                          <Route
+                            exact={true}
+                            path="/engineering-value-chain"
+                            element={<EngineeringValueChainDashboard />}
+                          />
+                          <Route
+                            exact={true}
+                            path="/engineering-value-chain/phase/:phaseId"
+                            element={<PhaseDetail />}
+                          />
+
+                          <Route
+                            exact={true}
+                            path="/ai-tools"
+                            element={<AIToolsDashboard />}
+                          />
+                          <Route
+                            exact={true}
+                            path="/ai-tools/bom-composer"
+                            element={<BOMComposerTool />}
                           />
                         </Route>
                       </Routes>

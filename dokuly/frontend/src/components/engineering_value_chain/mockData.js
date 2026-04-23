@@ -1,0 +1,142 @@
+// Mock data for Engineering Value Chain
+
+export const engineeringPhases = [
+  {
+    phase_id: 1,
+    phase_name: "商品企画／顧客要求",
+    phase_name_en: "Product Planning / Customer Requirements",
+    status: "in_progress", // pending, in_progress, completed
+    completion_percentage: 60,
+    output_artifacts: [
+      { id: 1, name: "商品企画書", required: true, uploaded: true, document_id: null },
+      { id: 2, name: "要求仕様書", required: true, uploaded: true, document_id: null },
+      { id: 3, name: "目標原価設定書", required: true, uploaded: false, document_id: null },
+      { id: 4, name: "法規/規格リスト", required: false, uploaded: false, document_id: null },
+    ],
+    enabling_function: {
+      title: "BOM Composer",
+      description: "設計意図を明確化し後工程と同期",
+      status: "available", // available, coming_soon
+      icon: "cpu",
+    },
+    start_date: "2026-04-15",
+    target_end_date: "2026-05-15",
+    actual_end_date: null,
+  },
+  {
+    phase_id: 2,
+    phase_name: "製品設計",
+    phase_name_en: "Product Design",
+    status: "pending",
+    completion_percentage: 0,
+    output_artifacts: [
+      { id: 5, name: "図面/CAD", required: true, uploaded: false, document_id: null },
+      { id: 6, name: "EBOM", required: true, uploaded: false, document_id: null },
+      { id: 7, name: "DRBFM", required: true, uploaded: false, document_id: null },
+      { id: 8, name: "DR議事録", required: false, uploaded: false, document_id: null },
+    ],
+    enabling_function: {
+      title: "Design Review",
+      description: "検図効率化とナレッジ活用",
+      status: "available",
+      icon: "eye",
+    },
+    start_date: null,
+    target_end_date: "2026-06-15",
+    actual_end_date: null,
+  },
+  {
+    phase_id: 3,
+    phase_name: "原価企画／調達",
+    phase_name_en: "Cost Planning / Procurement",
+    status: "pending",
+    completion_percentage: 0,
+    output_artifacts: [
+      { id: 9, name: "購入仕様書", required: true, uploaded: false, document_id: null },
+      { id: 10, name: "見積明細", required: true, uploaded: false, document_id: null },
+      { id: 11, name: "調達先選定記録", required: true, uploaded: false, document_id: null },
+      { id: 12, name: "サプライヤ契約", required: false, uploaded: false, document_id: null },
+    ],
+    enabling_function: {
+      title: "AI原価査定",
+      description: "原価のモノサシを持ち上流で適正化",
+      status: "available",
+      icon: "dollar-sign",
+    },
+    start_date: null,
+    target_end_date: "2026-07-15",
+    actual_end_date: null,
+  },
+  {
+    phase_id: 4,
+    phase_name: "生産準備／設備設計",
+    phase_name_en: "Production Preparation / Equipment Design",
+    status: "pending",
+    completion_percentage: 0,
+    output_artifacts: [
+      { id: 13, name: "MBOM/BOP", required: true, uploaded: false, document_id: null },
+      { id: 14, name: "PFMEA/作業指示書", required: true, uploaded: false, document_id: null },
+      { id: 15, name: "設備仕様書", required: true, uploaded: false, document_id: null },
+      { id: 16, name: "設備/治工具図面", required: false, uploaded: false, document_id: null },
+    ],
+    enabling_function: {
+      title: "AI工程リスク管理",
+      description: "工程設計の予見を組織知に",
+      status: "available",
+      icon: "alert-triangle",
+    },
+    start_date: null,
+    target_end_date: "2026-08-15",
+    actual_end_date: null,
+  },
+  {
+    phase_id: 5,
+    phase_name: "生産／保全",
+    phase_name_en: "Production / Maintenance",
+    status: "pending",
+    completion_percentage: 0,
+    output_artifacts: [
+      { id: 17, name: "コントロールプラン", required: true, uploaded: false, document_id: null },
+      { id: 18, name: "初期流動管理記録", required: true, uploaded: false, document_id: null },
+      { id: 19, name: "保全計画", required: true, uploaded: false, document_id: null },
+      { id: 20, name: "保全/改修履歴", required: false, uploaded: false, document_id: null },
+    ],
+    enabling_function: {
+      title: "AI保全アシスト",
+      description: "生まれよく育ち続ける設備に",
+      status: "available",
+      icon: "tool",
+    },
+    start_date: null,
+    target_end_date: "2026-09-15",
+    actual_end_date: null,
+  },
+  {
+    phase_id: 6,
+    phase_name: "品質保証",
+    phase_name_en: "Quality Assurance",
+    status: "pending",
+    completion_percentage: 0,
+    output_artifacts: [
+      { id: 21, name: "PPAP承認書類", required: true, uploaded: false, document_id: null },
+      { id: 22, name: "限度見本", required: false, uploaded: false, document_id: null },
+      { id: 23, name: "検査記録", required: true, uploaded: false, document_id: null },
+      { id: 24, name: "不具合報告書", required: false, uploaded: false, document_id: null },
+    ],
+    enabling_function: null, // Phase 6 has no AI function
+    start_date: null,
+    target_end_date: "2026-10-15",
+    actual_end_date: null,
+  },
+];
+
+export const mockValueChainInstance = {
+  id: "VC-001",
+  product_name: "スマートウォッチ Model X",
+  product_code: "SW-X-2026",
+  current_phase: 1,
+  overall_progress: 10,
+  created_date: "2026-04-15",
+  created_by: "山田太郎",
+  phases: engineeringPhases,
+};
